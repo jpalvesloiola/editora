@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biblioteca</title>
+</head>
+<body>
+    <!-- Formulário de busca -->
+    <form method="get">
+        <input type="text" name="q" placeholder="Buscar por título ou autor" value="{{ request.GET.q }}">
+        <button type="submit">Buscar</button>
+    </form>
+    
+    <h1>Lista de Livros</h1>
+    
+    <!-- Lista de livros -->
+    <ul>
+        {% for livro in livros %}
+            <li>
+                <a href="{% url 'livro_detail' livro.pk %}">{{ livro.titulo }}</a> -
+                {{ livro.autores }}
+            </li>
+        {% empty %}
+            <li>Nenhum livro encontrado.</li>
+        {% endfor %}
+    </ul>
+    
+    <!-- Paginação -->
+    {% if is_paginated %}
+        <div>
+            {% if page_obj.has_previous %}
+                <a href="?q={{ request.GET.q }}&page={{ page_obj.previous_page_number }}">Anterior</a>
+            {% endif %}
+            
+            Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}
+            
+            {% if page_obj.has_next %}
+                <a href="?q={{ request.GET.q }}&page={{ page_obj.next_page_number }}">Próxima</a>
+            {% endif %}
+        </div>
+    {% endif %}
+</body>
+</html>

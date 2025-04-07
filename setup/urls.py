@@ -21,7 +21,10 @@ from biblioteca.views import home, upload_excel
 from django.conf import settings
 from django.conf.urls.static import static
 
-urlpatterns = [path("admin/", admin.site.urls), path("", include("biblioteca.urls")), path("upload/", upload_excel), ]
+urlpatterns = [
+    path("admin/", admin.site.urls), 
+    path("", include("biblioteca.urls")), 
+]
 
 # Adicionar suporte para servir arquivos de mídia em desenvolvimento
 if settings.DEBUG:

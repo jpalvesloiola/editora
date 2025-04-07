@@ -16,6 +16,7 @@ def upload_excel(request):
         return render(request, 'import_success.html')
     return render(request, 'upload_excel.html')
 
+
 class LivroListView(ListView):
     model = Livro
     template_name = 'livros/livro_list.html'
